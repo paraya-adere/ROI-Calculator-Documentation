@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación - Calculadora ROI Adereso AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a1a2e;
+            line-height: 1.6;
+            background: #fff;
+            font-size: 11pt;
+        }
+
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 60px;
+        }
+
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(135deg, #00164F 0%, #1864FF 100%);
+            color: white;
+            padding: 80px 60px;
+            page-break-after: always;
+        }
+
+        .cover h1 {
+            font-size: 42pt;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .cover .subtitle {
+            font-size: 16pt;
+            font-weight: 300;
+            opacity: 0.85;
+            margin-bottom: 60px;
+        }
+
+        .cover .meta {
+            font-size: 10pt;
+            opacity: 0.6;
+            margin-top: auto;
+        }
+
+        .cover .logo {
+            font-size: 18pt;
+            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 20pt;
+            font-weight: 700;
+            color: #00164F;
+            margin: 40px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #1864FF;
+        }
+
+        h3 {
+            font-size: 13pt;
+            font-weight: 600;
+            color: #1864FF;
+            margin: 28px 0 12px 0;
+        }
+
+        h4 {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #00164F;
+            margin: 20px 0 8px 0;
+        }
+
+        p, li { margin-bottom: 8px; }
+
+        ul, ol {
+            padding-left: 22px;
+            margin-bottom: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 24px 0;
+            font-size: 10pt;
+        }
+
+        th {
+            background: #00164F;
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 9.5pt;
+        }
+
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        tr:nth-child(even) { background: #f7f8fc; }
+
+        .formula-box {
+            background: #f0f4ff;
+            border-left: 4px solid #1864FF;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 11pt;
+        }
+
+        .formula-box .formula {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #00164F;
+            font-size: 11pt;
+            margin-bottom: 4px;
+        }
+
+        .formula-box .formula-desc {
+            font-size: 9.5pt;
+            color: #555;
+        }
+
+        .highlight-box {
+            background: #fff8f0;
+            border-left: 4px solid #FF5C00;
+            padding: 14px 20px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 10pt;
+        }
+
+        .info-box {
+            background: #f0fff4;
+            border-left: 4px solid #22c55e;
+            padding: 14px 20px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 10pt;
+        }
+
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 24px 0;
+        }
+
+        .flow-step {
+            background: #00164F;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 9.5pt;
+            font-weight: 500;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .flow-step.alt { background: #1864FF; }
+        .flow-step.result { background: #22c55e; }
+
+        .flow-arrow {
+            font-size: 18pt;
+            color: #1864FF;
+            font-weight: 700;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 16px 0;
+        }
+
+        .col-card {
+            background: #f7f8fc;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .col-card h4 {
+            margin-top: 0;
+            color: #1864FF;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+
+        .badge-blue { background: #e8eeff; color: #1864FF; }
+        .badge-orange { background: #fff0e6; color: #FF5C00; }
+        .badge-green { background: #e6fff0; color: #16a34a; }
+
+        .example-block {
+            background: #fafbff;
+            border: 1px solid #e0e4f0;
+            border-radius: 10px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .example-block .example-title {
+            font-weight: 700;
+            color: #00164F;
+            margin-bottom: 12px;
+            font-size: 11pt;
+        }
+
+        .example-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed #e0e0e0;
+            font-size: 10pt;
+        }
+
+        .example-row:last-child { border-bottom: none; }
+        .example-row .label { color: #555; }
+        .example-row .value { font-weight: 600; color: #00164F; }
+
+        .plan-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .plan-card {
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .plan-card.mensual {
+            background: #f7f8fc;
+            border: 2px solid #e0e4f0;
+        }
+
+        .plan-card.anual {
+            background: #f0f4ff;
+            border: 2px solid #1864FF;
+        }
+
+        .plan-card .plan-name {
+            font-weight: 700;
+            font-size: 12pt;
+            margin-bottom: 12px;
+        }
+
+        .plan-card .plan-detail {
+            font-size: 9.5pt;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        .plan-card .plan-value {
+            font-weight: 700;
+            color: #1864FF;
+            font-size: 11pt;
+        }
+
+        .section-divider {
+            border: none;
+            height: 1px;
+            background: #e8e8e8;
+            margin: 32px 0;
+        }
+
+        .toc {
+            page-break-after: always;
+        }
+
+        .toc h2 { border-bottom-color: #00164F; }
+
+        .toc ol {
+            list-style: none;
+            padding: 0;
+            counter-reset: toc-counter;
+        }
+
+        .toc ol li {
+            counter-increment: toc-counter;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 11pt;
+        }
+
+        .toc ol li::before {
+            content: "0" counter(toc-counter);
+            font-weight: 700;
+            color: #1864FF;
+            margin-right: 14px;
+            font-size: 12pt;
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1864FF;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 11pt;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(24, 100, 255, 0.4);
+            z-index: 999;
+        }
+
+        .print-btn:hover { background: #0050e0; }
+
+        @media print {
+            .print-btn { display: none; }
+            body { font-size: 10pt; }
+            .page { padding: 30px 40px; }
+            .cover { padding: 60px 40px; min-height: auto; height: 100vh; }
+            h2 { page-break-after: avoid; }
+            table, .formula-box, .example-block { page-break-inside: avoid; }
+
+            .flow-diagram { gap: 4px; }
+            .flow-step { padding: 6px 10px; font-size: 8pt; min-width: 70px; }
+            .flow-arrow { font-size: 12pt; }
+        }
+    </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">Guardar como PDF</button>
+
+<!-- PORTADA -->
+<div class="cover">
+    <div class="logo">adereso.ai</div>
+    <h1>Calculadora ROI</h1>
+    <div class="subtitle">Documentación funcional: cómo opera la calculadora actualmente, qué valores usa y cómo se calculan los resultados.</div>
+    <div class="meta">
+        Documento interno &mdash; Febrero 2026<br>
+        Basado en el código de producción actual (index.html)
+    </div>
+</div>
+
+<!-- ÍNDICE -->
+<div class="page toc">
+    <h2>Contenido</h2>
+    <ol>
+        <li>Qué hace la calculadora</li>
+        <li>Recorrido del usuario paso a paso</li>
+        <li>Datos que ingresa el usuario</li>
+        <li>Tasas de automatización por industria</li>
+        <li>Precios de Adereso por volumen</li>
+        <li>Fórmulas: cómo se calcula cada resultado</li>
+        <li>Efecto del Plan Anual</li>
+        <li>Resultados que ve el usuario</li>
+        <li>Ejemplo completo con números</li>
+        <li>Qué parámetros se pueden ajustar</li>
+    </ol>
+</div>
+
+
+<!-- SECCIÓN 1 -->
+<div class="page">
+
+    <h2>01 &mdash; Qué hace la calculadora</h2>
+    <p>La calculadora ROI le muestra a un potencial cliente <strong>cuánto dinero ahorraría al año</strong> si automatiza su atención al cliente con Adereso AI.</p>
+    <p>El visitante ingresa sus datos operativos y la calculadora le devuelve dos números principales:</p>
+    <ul>
+        <li><strong>Cuántas conversaciones</strong> se automatizarían al año.</li>
+        <li><strong>Cuánto dinero (USD)</strong> se ahorraría al año.</li>
+    </ul>
+    <p>Adicionalmente puede descargar un reporte PDF con el desglose completo y compartir los resultados por URL.</p>
+
+    <hr class="section-divider">
+
+    <!-- SECCIÓN 2 -->
+    <h2>02 &mdash; Recorrido del usuario</h2>
+    <p>Estos son los pasos que sigue el visitante:</p>
+
+    <div class="flow-diagram">
+        <div class="flow-step">Elige industria</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step">Ingresa volumen mensual</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step alt">Presiona "Calcular"</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step result">Ve resultados</div>
+    </div>
+
+    <p>Una vez que ve los resultados, puede opcionalmente:</p>
+
+    <div class="flow-diagram">
+        <div class="flow-step">Ajustar canales, IA, ejecutivos, salario</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step alt">Recalcular</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-step result">Descargar PDF / Compartir URL</div>
+    </div>
+
+    <div class="info-box">
+        <strong>Dato clave:</strong> El usuario solo necesita 2 datos obligatorios para obtener resultados: la industria y el volumen mensual de conversaciones. Todo lo demás viene con valores por defecto.
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- SECCIÓN 3 -->
+    <h2>03 &mdash; Datos que ingresa el usuario</h2>
+
+    <h3>Pantalla 1 &mdash; Datos obligatorios</h3>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Qué es</th>
+            <th>Opciones / Valor por defecto</th>
+        </tr>
+        <tr>
+            <td><strong>Industria</strong></td>
+            <td>Define la tasa de automatización esperada</td>
+            <td>Retail, Servicios Financieros, Servicios Básicos, Otros</td>
+        </tr>
+        <tr>
+            <td><strong>Volumen mensual</strong></td>
+            <td>Total de conversaciones/tickets al mes</td>
+            <td>Lo ingresa el usuario</td>
+        </tr>
+    </table>
+
+    <h3>Pantalla 2 &mdash; Datos opcionales (vienen pre-llenados)</h3>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Qué es</th>
+            <th>Valor por defecto</th>
+        </tr>
+        <tr>
+            <td><strong>Nivel de IA</strong></td>
+            <td>Qué tipo de automatización se usa</td>
+            <td>Automatización de Flujo</td>
+        </tr>
+        <tr>
+            <td><strong>Distribución por canal</strong></td>
+            <td>Cómo se reparten los tickets entre Chats, Correos y Redes Sociales</td>
+            <td>Chats 30%, Correos 60%, RRSS 10%</td>
+        </tr>
+        <tr>
+            <td><strong>Número de ejecutivos</strong></td>
+            <td>Cantidad de agentes del contact center</td>
+            <td>Se calcula: tickets ÷ 600 (mínimo 1)</td>
+        </tr>
+        <tr>
+            <td><strong>Salario mensual por ejecutivo</strong></td>
+            <td>Sueldo bruto mensual en USD</td>
+            <td>$1,000 USD</td>
+        </tr>
+        <tr>
+            <td><strong>Plan Anual</strong></td>
+            <td>Toggle que aplica descuento del 12%</td>
+            <td>Activado por defecto</td>
+        </tr>
+    </table>
+
+    <h4>Niveles de IA disponibles</h4>
+    <table>
+        <tr>
+            <th>Nivel</th>
+            <th>Descripción (tal como aparece en la calculadora)</th>
+        </tr>
+        <tr>
+            <td><span class="badge badge-blue">Automatización de Flujo</span></td>
+            <td>Ideal para consultas repetitivas de baja complejidad (p.e. información de horarios o boleta)</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-orange">GenAI Básica</span></td>
+            <td>Pensado para atención conversacional de consultas diversas (p.e. asistente de venta o soporte técnico simple)</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-green">GenAI Plus</span></td>
+            <td>Diseñado para automatizar atenciones complejas (p.e. validación de usuario con cédula de identidad o venta consultiva)</td>
+        </tr>
+    </table>
+
+    <hr class="section-divider">
+
+    <!-- SECCIÓN 4 -->
+    <h2>04 &mdash; Tasas de automatización por industria</h2>
+    <p>Esta tabla define <strong>qué porcentaje de los tickets la IA resuelve sola</strong>. Es el dato más influyente en el resultado final. Se asigna automáticamente al elegir la industria:</p>
+
+    <table>
+        <tr>
+            <th>Industria</th>
+            <th>Flujo</th>
+            <th>GenAI Básica</th>
+            <th>GenAI Plus</th>
+        </tr>
+        <tr>
+            <td><strong>Retail</strong></td>
+            <td>40%</td>
+            <td>50%</td>
+            <td>60%</td>
+        </tr>
+        <tr>
+            <td><strong>Servicios Financieros</strong></td>
+            <td>60%</td>
+            <td>70%</td>
+            <td>75%</td>
+        </tr>
+        <tr>
+            <td><strong>Servicios Básicos</strong></td>
+            <td>70%</td>
+            <td>80%</td>
+            <td>90%</td>
+        </tr>
+        <tr>
+            <td><strong>Otros</strong></td>
+            <td>60%</td>
+            <td>70%</td>
+            <td>75%</td>
+        </tr>
+    </table>
+
+    <div class="highlight-box">
+        <strong>¿Por qué Servicios Básicos tiene las tasas más altas?</strong> Porque sus consultas suelen ser muy repetitivas y estandarizadas ("¿cuánto debo?", "¿cuándo vence mi boleta?"). Retail tiene las más bajas porque las consultas de compra son más variadas.
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- SECCIÓN 5 -->
+    <h2>05 &mdash; Precios de Adereso por volumen</h2>
+    <p>Adereso cobra <strong>por ticket</strong>. A mayor volumen, menor precio unitario. El precio tiene dos componentes internos (Desk + Studio), pero lo relevante es el <strong>total por ticket</strong>:</p>
+
+    <table>
+        <tr>
+            <th>Rango de tickets</th>
+            <th>Flujo</th>
+            <th>GenAI Básica</th>
+            <th>GenAI Plus</th>
+        </tr>
+        <tr>
+            <td>Hasta 4,500</td>
+            <td>$0.173</td>
+            <td>$0.222</td>
+            <td>$0.369</td>
+        </tr>
+        <tr>
+            <td>Hasta 13,500</td>
+            <td>$0.158</td>
+            <td>$0.203</td>
+            <td>$0.336</td>
+        </tr>
+        <tr>
+            <td>Hasta 40,500</td>
+            <td>$0.148</td>
+            <td>$0.190</td>
+            <td>$0.315</td>
+        </tr>
+        <tr>
+            <td>Hasta 121,500</td>
+            <td>$0.136</td>
+            <td>$0.175</td>
+            <td>$0.291</td>
+        </tr>
+        <tr>
+            <td>Hasta 364,500</td>
+            <td>$0.130</td>
+            <td>$0.168</td>
+            <td>$0.278</td>
+        </tr>
+        <tr>
+            <td>Hasta 1,093,500</td>
+            <td>$0.123</td>
+            <td>$0.158</td>
+            <td>$0.262</td>
+        </tr>
+        <tr>
+            <td>Hasta 3,280,500</td>
+            <td>$0.119</td>
+            <td>$0.153</td>
+            <td>$0.253</td>
+        </tr>
+    </table>
+
+    <div class="info-box">
+        <strong>Cargo fijo:</strong> Además del costo por ticket, siempre se suma un cargo fijo de <strong>$250 USD al mes</strong>.
+    </div>
+
+    <p>Los rangos escalan por factor x3: 4,500 &rarr; 13,500 &rarr; 40,500 &rarr; 121,500 &rarr; 364,500 &rarr; 1,093,500 &rarr; 3,280,500. La calculadora busca el primer rango que sea mayor o igual al volumen de tickets del cliente.</p>
+
+    <hr class="section-divider">
+
+    <!-- SECCIÓN 6 -->
+    <h2>06 &mdash; Fórmulas: cómo se calcula cada resultado</h2>
+    <p>A continuación están <strong>todas las fórmulas</strong> que usa la calculadora, en el orden en que se ejecutan.</p>
+
+    <h3>Paso 1: Tickets totales mensuales</h3>
+    <div class="formula-box">
+        <div class="formula">Tickets Totales = Chats + Correos + Redes Sociales</div>
+        <div class="formula-desc">La distribución inicial es automática: 30% chats, 60% correos, 10% redes sociales del volumen ingresado. El usuario puede mover los sliders.</div>
+    </div>
+
+    <h3>Paso 2: Número de ejecutivos sugerido</h3>
+    <div class="formula-box">
+        <div class="formula">Ejecutivos = Tickets Totales ÷ 600 &nbsp;&nbsp;(redondeado hacia arriba, mínimo 1)</div>
+        <div class="formula-desc">Se asume que un ejecutivo gestiona hasta 600 tickets al mes. Si el usuario ingresa un número manualmente, se usa ese valor.</div>
+    </div>
+
+    <h3>Paso 3: Costo anual del Contact Center (situación actual sin Adereso)</h3>
+    <div class="formula-box">
+        <div class="formula">Costo Anual CC = Salario Mensual &times; Número de Ejecutivos &times; 12</div>
+    </div>
+
+    <h3>Paso 4: Costo actual por ticket</h3>
+    <div class="formula-box">
+        <div class="formula">Costo por Ticket = (Salario &times; Ejecutivos &times; 12) ÷ (Tickets Mensuales &times; 12)</div>
+        <div class="formula-desc">Divide el gasto total anual de nómina entre los tickets totales anuales.</div>
+    </div>
+
+    <h3>Paso 5: Tasa de automatización</h3>
+    <div class="formula-box">
+        <div class="formula">Tasa = industryRates[industria seleccionada][nivel de IA seleccionado] ÷ 100</div>
+        <div class="formula-desc">Viene de la tabla de tasas de la sección 04. Ejemplo: Financieros + GenAI Básica = 70% &rarr; 0.70</div>
+    </div>
+
+    <h3>Paso 6: Tickets automatizados al año</h3>
+    <div class="formula-box">
+        <div class="formula">Tickets Automatizados = (Tickets Mensuales &times; 12) &times; Tasa de Automatización</div>
+    </div>
+
+    <h3>Paso 7: Ahorro bruto anual</h3>
+    <div class="formula-box">
+        <div class="formula">Ahorro Bruto = Tickets Automatizados &times; Costo por Ticket</div>
+        <div class="formula-desc">Si el Plan Anual está activado, se aplica: <strong>Ahorro Bruto &times; 1.12</strong></div>
+    </div>
+
+    <h3>Paso 8: Inversión anual en Adereso</h3>
+    <div class="formula-box">
+        <div class="formula">Costo Mensual = (Precio por Ticket Adereso &times; Tickets Mensuales) + $250</div>
+        <div class="formula">Inversión Anual = Costo Mensual &times; 12</div>
+        <div class="formula-desc">Si el Plan Anual está activado, se aplica: <strong>Inversión Anual &times; 0.88</strong> (descuento 12%)</div>
+    </div>
+
+    <h3>Paso 9: Ahorro neto (retorno)</h3>
+    <div class="formula-box">
+        <div class="formula">Ahorro Neto = Ahorro Bruto &minus; Inversión Anual</div>
+    </div>
+
+    <h3>Paso 10: ROI</h3>
+    <div class="formula-box">
+        <div class="formula">ROI (veces) = Ahorro Bruto ÷ Inversión Anual</div>
+        <div class="formula">ROI (%) = (Ahorro Bruto ÷ Inversión Anual) &times; 100</div>
+    </div>
+
+    <h3>Paso 11: Payback (tiempo de recuperación)</h3>
+    <div class="formula-box">
+        <div class="formula">Payback (meses) = (Inversión Anual ÷ Costo Anual CC) &times; 12</div>
+    </div>
+
+    <h3>Paso 12: Nuevo costo del Contact Center</h3>
+    <div class="formula-box">
+        <div class="formula">Nuevo Costo CC = Costo Anual CC &minus; Ahorro Bruto + Inversión Anual</div>
+    </div>
+
+    <h3>Paso 13: Incremento de eficiencia</h3>
+    <div class="formula-box">
+        <div class="formula">Eficiencia (%) = (Nuevo Costo CC ÷ Costo Anual CC) &times; 100</div>
+        <div class="formula-desc">Si da 50%, significa que el nuevo costo es la mitad del original.</div>
+    </div>
+
+    <h3>Paso 14: Reducción estimada de ejecutivos</h3>
+    <div class="formula-box">
+        <div class="formula">Ejecutivos Reducidos = Número de Ejecutivos &times; Tasa de Automatización</div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- SECCIÓN 7 -->
+    <h2>07 &mdash; Efecto del Plan Anual</h2>
+    <p>El toggle "Contratar Adereso AI con Plan" viene <strong>activado por defecto</strong>. Cuando está activado, mueve <strong>dos variables al mismo tiempo</strong>:</p>
+
+    <div class="plan-comparison">
+        <div class="plan-card mensual">
+            <div class="plan-name">Sin Plan Anual</div>
+            <div class="plan-detail">Inversión:</div>
+            <div class="plan-value">Costo mensual &times; 12</div>
+            <br>
+            <div class="plan-detail">Ahorro:</div>
+            <div class="plan-value">Tickets autom. &times; costo por ticket</div>
+        </div>
+        <div class="plan-card anual">
+            <div class="plan-name">Con Plan Anual ✓</div>
+            <div class="plan-detail">Inversión:</div>
+            <div class="plan-value">Costo mensual &times; 12 &times; 0.88</div>
+            <br>
+            <div class="plan-detail">Ahorro:</div>
+            <div class="plan-value">Tickets autom. &times; costo por ticket &times; 1.12</div>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <strong>Efecto combinado:</strong> El impacto en el ROI es mucho mayor que un simple 12%, porque se paga menos (inversión baja) Y se muestra más ahorro (ahorro sube). Ambas palancas se mueven a favor.
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- SECCIÓN 8 -->
+    <h2>08 &mdash; Resultados que ve el usuario</h2>
+
+    <h3>En pantalla (después de calcular)</h3>
+    <div class="two-col">
+        <div class="col-card">
+            <h4>Resultado 1</h4>
+            <p><strong>Conversaciones Automatizadas por Adereso AI</strong></p>
+            <p style="font-size:9.5pt;color:#555;">Es el total de tickets automatizados al año (variable <em>tickets_solved</em>)</p>
+        </div>
+        <div class="col-card">
+            <h4>Resultado 2</h4>
+            <p><strong>Ahorro Anual con Adereso AI (USD)</strong></p>
+            <p style="font-size:9.5pt;color:#555;">Es el ahorro bruto anual en dólares (variable <em>ahorro_bruto</em>)</p>
+        </div>
+    </div>
+
+    <h3>En el reporte PDF descargable</h3>
+    <div class="two-col">
+        <div class="col-card">
+            <h4>Datos Operativos</h4>
+            <ul style="font-size:9.5pt;">
+                <li>Cantidad de ejecutivos</li>
+                <li>Sueldo bruto ejecutivo</li>
+                <li>Costo anual de nómina del CC</li>
+                <li>Tickets gestionados mensualmente</li>
+                <li>Porcentaje de automatización esperado</li>
+                <li>Tickets automatizados (mensual y anual)</li>
+                <li>Reducción estimada de ejecutivos</li>
+                <li>Multiplicador de inversión y meses payback</li>
+            </ul>
+        </div>
+        <div class="col-card">
+            <h4>Análisis Financiero</h4>
+            <ul style="font-size:9.5pt;">
+                <li>Ahorro anual generado</li>
+                <li>Nuevo costo del Contact Center</li>
+                <li>Incremento de eficiencia</li>
+                <li>Inversión en Adereso</li>
+                <li>Retorno anual</li>
+                <li>ROI (%)</li>
+            </ul>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- SECCIÓN 9 -->
+    <h2>09 &mdash; Ejemplo completo con números</h2>
+
+    <div class="example-block">
+        <div class="example-title">Datos de entrada del ejemplo</div>
+        <div class="example-row"><span class="label">Industria</span><span class="value">Servicios Financieros</span></div>
+        <div class="example-row"><span class="label">Volumen mensual</span><span class="value">3,000 tickets</span></div>
+        <div class="example-row"><span class="label">Distribución</span><span class="value">Chats 900 (30%), Correos 1,800 (60%), RRSS 300 (10%)</span></div>
+        <div class="example-row"><span class="label">Nivel de IA</span><span class="value">GenAI Básica</span></div>
+        <div class="example-row"><span class="label">Ejecutivos</span><span class="value">5 (calculado: 3,000 ÷ 600 = 5)</span></div>
+        <div class="example-row"><span class="label">Salario mensual</span><span class="value">$1,000 USD</span></div>
+        <div class="example-row"><span class="label">Plan Anual</span><span class="value">Activado</span></div>
+    </div>
+
+    <h3>Paso a paso del cálculo</h3>
+
+    <table>
+        <tr>
+            <th style="width:40%">Concepto</th>
+            <th style="width:35%">Fórmula aplicada</th>
+            <th>Resultado</th>
+        </tr>
+        <tr>
+            <td>Tickets anuales</td>
+            <td>3,000 &times; 12</td>
+            <td><strong>36,000</strong></td>
+        </tr>
+        <tr>
+            <td>Costo anual del CC</td>
+            <td>$1,000 &times; 5 &times; 12</td>
+            <td><strong>$60,000</strong></td>
+        </tr>
+        <tr>
+            <td>Costo por ticket actual</td>
+            <td>$60,000 ÷ 36,000</td>
+            <td><strong>$1.67</strong></td>
+        </tr>
+        <tr>
+            <td>Tasa de automatización</td>
+            <td>Financieros + GenAI Básica</td>
+            <td><strong>70%</strong></td>
+        </tr>
+        <tr>
+            <td>Tickets automatizados</td>
+            <td>36,000 &times; 0.70</td>
+            <td><strong>25,200</strong></td>
+        </tr>
+        <tr>
+            <td>Ahorro bruto</td>
+            <td>25,200 &times; $1.67</td>
+            <td><strong>$42,084</strong></td>
+        </tr>
+        <tr>
+            <td>Ahorro bruto (plan anual)</td>
+            <td>$42,084 &times; 1.12</td>
+            <td><strong>$47,134</strong></td>
+        </tr>
+        <tr>
+            <td>Precio ticket Adereso</td>
+            <td>Desk $0.138 + Studio $0.084</td>
+            <td><strong>$0.222</strong></td>
+        </tr>
+        <tr>
+            <td>Costo mensual Adereso</td>
+            <td>($0.222 &times; 3,000) + $250</td>
+            <td><strong>$916/mes</strong></td>
+        </tr>
+        <tr>
+            <td>Inversión anual</td>
+            <td>$916 &times; 12</td>
+            <td><strong>$10,992</strong></td>
+        </tr>
+        <tr>
+            <td>Inversión anual (plan anual)</td>
+            <td>$10,992 &times; 0.88</td>
+            <td><strong>$9,673</strong></td>
+        </tr>
+        <tr>
+            <td>Ahorro neto</td>
+            <td>$47,134 &minus; $9,673</td>
+            <td><strong>$37,461</strong></td>
+        </tr>
+        <tr>
+            <td>ROI (veces)</td>
+            <td>$47,134 ÷ $9,673</td>
+            <td><strong>4.87x</strong></td>
+        </tr>
+        <tr>
+            <td>ROI (%)</td>
+            <td>($47,134 ÷ $9,673) &times; 100</td>
+            <td><strong>487%</strong></td>
+        </tr>
+        <tr>
+            <td>Payback</td>
+            <td>($9,673 ÷ $60,000) &times; 12</td>
+            <td><strong>1.93 meses</strong></td>
+        </tr>
+        <tr>
+            <td>Nuevo costo CC</td>
+            <td>$60,000 &minus; $47,134 + $9,673</td>
+            <td><strong>$22,539</strong></td>
+        </tr>
+        <tr>
+            <td>Ejecutivos reducidos</td>
+            <td>5 &times; 0.70</td>
+            <td><strong>~4</strong></td>
+        </tr>
+    </table>
+
+    <hr class="section-divider">
+
+    <!-- SECCIÓN 10 -->
+    <h2>10 &mdash; Qué parámetros se pueden ajustar</h2>
+    <p>Si necesitas modificar cómo funciona la calculadora, estos son los parámetros clave y qué efecto tiene cambiar cada uno:</p>
+
+    <table>
+        <tr>
+            <th>Si quieres cambiar...</th>
+            <th>Efecto</th>
+            <th>Valor actual</th>
+        </tr>
+        <tr>
+            <td><strong>Tasas de automatización</strong></td>
+            <td>Subir la tasa → más ahorro. Bajarla → menos ahorro.</td>
+            <td>40%-90% según industria/IA</td>
+        </tr>
+        <tr>
+            <td><strong>Precios por ticket de Adereso</strong></td>
+            <td>Subir precio → más inversión, menor ROI. Bajar → mejor ROI.</td>
+            <td>$0.119 a $0.369 según volumen/IA</td>
+        </tr>
+        <tr>
+            <td><strong>Cargo fijo mensual</strong></td>
+            <td>Subir → más inversión. Bajar → mejor ROI.</td>
+            <td>$250 USD/mes</td>
+        </tr>
+        <tr>
+            <td><strong>Tickets por ejecutivo</strong></td>
+            <td>Subir (ej: 800) → menos ejecutivos sugeridos → menor costo por ticket → menos ahorro. Y viceversa.</td>
+            <td>600 tickets/ejecutivo</td>
+        </tr>
+        <tr>
+            <td><strong>Descuento Plan Anual</strong></td>
+            <td>Cambiar el porcentaje impacta directamente el ROI con plan anual.</td>
+            <td>12% descuento (×0.88) + 12% aumento ahorro (×1.12)</td>
+        </tr>
+        <tr>
+            <td><strong>Distribución default de canales</strong></td>
+            <td>No cambia el resultado total (usa la suma), solo la visualización inicial de sliders.</td>
+            <td>30% chats, 60% correos, 10% RRSS</td>
+        </tr>
+        <tr>
+            <td><strong>Salario por defecto</strong></td>
+            <td>Cambiar el default afecta el costo por ticket y por lo tanto el ahorro.</td>
+            <td>$1,000 USD</td>
+        </tr>
+        <tr>
+            <td><strong>Rangos de volumen</strong></td>
+            <td>Agregar o modificar rangos cambia en qué tramo de precio cae cada cliente.</td>
+            <td>7 rangos, escalando ×3</td>
+        </tr>
+    </table>
+
+    <div class="highlight-box">
+        <strong>Nota importante:</strong> Al modificar cualquier parámetro, los resultados se recalculan en tiempo real cada vez que el usuario mueve un slider o cambia un valor. No hace falta presionar ningún botón después del primer "Calcular".
+    </div>
+
+</div>
+
+</body>
+</html>
